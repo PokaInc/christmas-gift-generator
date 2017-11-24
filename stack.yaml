@@ -12,7 +12,7 @@ Resources:
               title:
                 Ref: AWS::StackName
             paths:
-              "/get":
+              "/gifts":
                 get:
                   x-amazon-apigateway-integration:
                     httpMethod: POST
@@ -31,7 +31,7 @@ Resources:
         GetApi:
           Type: Api
           Properties:
-            Path: /get
+            Path: /gifts
             Method: GET
             RestApiId:
                 Ref: MyApi
