@@ -1,6 +1,6 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
-Description: Simple API Endpoint configured using Swagger specified inline and backed by a Lambda function
+Description: A simple Gift Idea as a Service API
 Resources:
   MyApi:
     Type: AWS::Serverless::Api
@@ -25,7 +25,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Handler: index.handler
-      Runtime: nodejs6.10
+      Runtime: python3.6
       CodeUri: ./code
       Events:
         GetApi:
@@ -35,3 +35,7 @@ Resources:
             Method: GET
             RestApiId:
                 Ref: MyApi
+
+Outputs:
+  GiftsEndpoint:
+    Value: !Sub 'https://${MyApi}.execute-api.${AWS::Region}.amazonaws.com/prod/gifts'

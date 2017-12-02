@@ -7,5 +7,7 @@ aws cloudformation package \
 
 aws cloudformation deploy \
     --template-file packaged-template.yaml \
-    --stack-name christmas-gift-api \
+    --stack-name $STACK_NAME \
     --capabilities CAPABILITY_IAM
+
+echo "API endpoint: $(aws cloudformation describe-stacks --stack-name $STACK_NAME --query 'Stacks[0].Outputs[?OutputKey==`GiftsEndpoint`].OutputValue' --output text)"
